@@ -1,4 +1,5 @@
 <?php
+require_once 'urlMap.php';
 class Handler
 {
     public $jwt;
@@ -23,7 +24,7 @@ class Handler
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->jwt);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: ".$this->jwt]);
         $response = json_decode(curl_exec($ch),true);
         curl_close($ch);
         return $response;
